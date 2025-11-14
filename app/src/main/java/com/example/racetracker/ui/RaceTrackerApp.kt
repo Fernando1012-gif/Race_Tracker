@@ -62,26 +62,26 @@ fun RaceTrackerApp() {
      * be used with custom Saver object. But to keep the example simple, and keep focus on
      * Coroutines that implementation detail is stripped out.
      */
-    val playerOne = remember {
-        RaceParticipant(name = "Player 1", progressIncrement = 1)
+    val jugadoruno = remember {
+        RaceParticipant(name = "JUGADOR 1", progressIncrement = 1)
     }
-    val playerTwo = remember {
-        RaceParticipant(name = "Player 2", progressIncrement = 2)
+    val jugadordos = remember {
+        RaceParticipant(name = "JUGADOR 2", progressIncrement = 2)
     }
     var raceInProgress by remember { mutableStateOf(false) }
 
     if (raceInProgress) {
-        LaunchedEffect(playerOne, playerTwo) {
+        LaunchedEffect(jugadoruno, jugadordos) {
             coroutineScope {
-                launch { playerOne.run() }
-                launch { playerTwo.run() }
+                launch { jugadoruno.run() }
+                launch { jugadordos.run() }
             }
             raceInProgress = false
         }
     }
     RaceTrackerScreen(
-        playerOne = playerOne,
-        playerTwo = playerTwo,
+        playerOne = jugadoruno,
+        playerTwo = jugadordos,
         isRunning = raceInProgress,
         onRunStateChange = { raceInProgress = it },
         modifier = Modifier
